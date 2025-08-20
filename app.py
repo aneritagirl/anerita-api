@@ -27,9 +27,11 @@ def create_app():
     app.register_blueprint(emergency_bp, url_prefix='/api')
     app.register_blueprint(qr_bp, url_prefix='/api')
     app.register_blueprint(uploads_bp, url_prefix='/api')
-
-    @app.get('/health')
-    def health(): return {"ok": True}
+    
+    @app.get('/healthz')
+    def healthz():
+    return {"status": "ok"}, 200
+    
 
     return app
 
