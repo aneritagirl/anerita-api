@@ -21,17 +21,16 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+        # register blueprints...
+    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(profile_bp, url_prefix="/api/profile")
+    app.register_blueprint(emergency_bp, url_prefix="/api/emergency")
+    app.register_blueprint(qr_bp, url_prefix="/api/qr")
+    app.register_blueprint(uploads_bp, url_prefix="/api/uploads")
 
-    app.register_blueprint(auth_bp, url_prefix='/api')
-    app.register_blueprint(profile_bp, url_prefix='/api')
-    app.register_blueprint(emergency_bp, url_prefix='/api')
-    app.register_blueprint(qr_bp, url_prefix='/api')
-    app.register_blueprint(uploads_bp, url_prefix='/api')
-    
     @app.get('/healthz')
     def healthz():
-    return {"status": "ok"}, 200
-    
+        return {"status": "ok"}, 200
 
     return app
 
